@@ -65,11 +65,6 @@ class LEGOKibbleBalanceBasicFrame ( wx.Frame ):
 		
 		gbSizer1.Add( self.measureButton, wx.GBPosition( 5, 0 ), wx.GBSpan( 1, 1 ), wx.ALL|wx.EXPAND, 5 )
 		
-		self.advancedModeButton = wx.Button( self, wx.ID_ANY, u"Switch to Advanced Mode", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.advancedModeButton.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 90, 92, False, wx.EmptyString ) )
-		
-		gbSizer1.Add( self.advancedModeButton, wx.GBPosition( 6, 1 ), wx.GBSpan( 1, 1 ), wx.ALL|wx.EXPAND, 5 )
-		
 		
 		gbSizer1.AddGrowableCol( 0 )
 		gbSizer1.AddGrowableRow( 0 )
@@ -78,7 +73,6 @@ class LEGOKibbleBalanceBasicFrame ( wx.Frame ):
 		gbSizer1.AddGrowableRow( 3 )
 		gbSizer1.AddGrowableRow( 4 )
 		gbSizer1.AddGrowableRow( 5 )
-		gbSizer1.AddGrowableRow( 6 )
 		
 		self.SetSizer( gbSizer1 )
 		self.Layout()
@@ -88,7 +82,6 @@ class LEGOKibbleBalanceBasicFrame ( wx.Frame ):
 		# Connect Events
 		self.zeroButton.Bind( wx.EVT_BUTTON, self.zeroButtonOnButtonClick )
 		self.measureButton.Bind( wx.EVT_BUTTON, self.measureButtonOnButtonClick )
-		self.advancedModeButton.Bind( wx.EVT_BUTTON, self.advancedModeButtonOnButtonClick )
 	
 	def __del__( self ):
 		pass
@@ -99,9 +92,6 @@ class LEGOKibbleBalanceBasicFrame ( wx.Frame ):
 		event.Skip()
 	
 	def measureButtonOnButtonClick( self, event ):
-		event.Skip()
-	
-	def advancedModeButtonOnButtonClick( self, event ):
 		event.Skip()
 	
 

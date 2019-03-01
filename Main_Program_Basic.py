@@ -15,7 +15,7 @@ class LEGOKibbleBalanceBasic(BasicLEGOKibbleBalanceGUI.LEGOKibbleBalanceBasicFra
     def __init__(self, parent):
         BasicLEGOKibbleBalanceGUI.LEGOKibbleBalanceBasicFrame.__init__(self, parent)
         Phidget.initialise()
-        self.KiParam = 1
+        self.KiParam = 0.2
         self.KpParam = 0
         self.KdParam = 0
         self.phiVolt = 0
@@ -83,9 +83,8 @@ class LEGOKibbleBalanceBasic(BasicLEGOKibbleBalanceGUI.LEGOKibbleBalanceBasicFra
         # gravity = 9.8189
         # self.mass = currentA*averageBL/gravity
         # self.mass = -906*currentA - 0.141
-        self.mass = 830 * currentB - 0.169  # CALIBRATION
+        self.mass = 696 * currentB - 0.0411  # CALIBRATION
         self.massField.SetValue(str(abs(self.mass)))
-        self.statusField.SetValue("Completed Mass Measurement")
 
     def PID(self):
         ''' PID control for automatically adjusting the Kibble beam '''
@@ -108,11 +107,12 @@ class LEGOKibbleBalanceBasic(BasicLEGOKibbleBalanceGUI.LEGOKibbleBalanceBasicFra
                 count = 0
             if count > 5:
                 break
+            self.CalculateMass()
         self.GoToZero()
-        self.statusField.SetValue("Mass Measured")
+        self.statusField.SetValue("Completed Mass Measurement")
 
     def GoToZero(self):
-        self.statusField.SetValue("Going to Zero")
+        self.statusField.SetValue("Resetting...")
         i = self.phiVolt
         while i != 0:
             self.phiVolt = i
@@ -142,7 +142,7 @@ class LEGOKibbleBalanceBasic(BasicLEGOKibbleBalanceGUI.LEGOKibbleBalanceBasicFra
         self.target = latestAinValues[2]
         self.statusField.SetValue("Shadow Sensor Calibrated")
         time.sleep(2)
-        self.statusField.SetValue("Load Mass Onto Platform")
+        self.statusField.SetValue("Load Mass Onto Platform, then press 'Measure'")
 
 # mandatory in wx, create an app, False stands for not deteriction stdin/stdout
 # refer manual for details
